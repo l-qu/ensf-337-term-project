@@ -18,13 +18,12 @@ private:
 
 public:
 
-    Flight(): id(""), num_rows(0), num_cols(0) {}
-    Flight(string id, int r, int c);
+    Flight(string id_num = "", int r = 25, int c = 6): id(id_num), num_rows(r), num_cols(c) {}
 
     void add_passenger(int id, string fname, string lname, string phone);
     void remove_passenger(int id);
     int get_passenger(int id)const;
-    string get_id()const;
+    string get_id()const { return id; }
     void show_seat_map()const;
     void set_set_status(int row, char col, char status);
     bool check_seat(int row, int col)const;
