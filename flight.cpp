@@ -1,0 +1,75 @@
+// flight.cpp
+
+#include "seat.hpp"
+#include "passenger.hpp"
+#include "flight.hpp"
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c) {
+    seat_map.resize(num_rows);
+
+    for (int i = 0; i < num_rows; i++) {
+        seat_map.at(i).resize(num_cols);
+        for (int j = 0; j < num_cols; j++) {
+            seat_map.at(i).at(j).set_row_num(i);
+            seat_map.at(i).at(j).set_seat_char('A' + j);
+        }
+    }
+}
+
+Passenger* Flight::get_passenger(int id) {
+    for (int i = 0; i < passengers.size(); i++) {
+        if (passengers.at(i).get_id() == id) {
+            return &(passengers.at(i));
+        }
+    }
+
+    cout << "Passenger not in the list.\n";
+    return nullptr;
+}
+
+void Flight::add_passenger(int id, string fname, string lname, string phone) {
+    Passenger new_passenger(id, fname, lname, phone);
+    passengers.push_back(new_passenger);
+}
+
+void Flight::remove_passenger(int id) {
+    for (int i = 0; i < passengers.size(); i++) {
+        if (passengers.at(i).get_id() == id) {
+            passengers.erase(passengers.begin() + i);
+            return;
+        }
+    }
+
+    cout << "Passenger not in the list.\n";
+}
+
+void Flight::set_seat_status(int row, char col, char status) {
+    // Assume seat status has already been appropriately checked
+    
+    seat_map.at(row).at(col - 'A').set_status(status);
+}
+
+bool Flight::check_seat(int row, int col) const {
+    // Returns true if the seat is not occupied
+    
+    if (seat_map.at(row).at(col - 'A').get_status() == ' ') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void Flight::assign_seat(int row, char col, int passenger_id) {
+    Passenger* new_passenger = get_passenger(passenger_id);
+    // Might or might not need the following error handling depending on how we write the main program
+    if (new_passenger == nullptr) {
+        cout << "Passenger not in list.\n";
+        return;
+    }
+
+    new_passenger->set_seat(&seat_map.at(row).at(col - 'A'));
+}
