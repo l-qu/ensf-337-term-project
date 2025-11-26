@@ -26,12 +26,12 @@ void Airline::remove_flight(string id) {
     return;
 }
 
-Flight Airline::get_flight(string id)const{
+Flight* Airline::get_flight(string id)const{
     for(size_t i = 0; i < flights.size(); i++) {
         if(flights.at(i).get_id() == id) {
-            return flights.at(i);
+            return &(flights.at(i));
         }
     }
-    Flight emptyFlight;
-    return emptyFlight;
+    cout << "Flight does not exist.\n";
+    return nullptr;
 }
