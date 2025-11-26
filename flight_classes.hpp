@@ -6,45 +6,56 @@
 
 #include <vector>
 #include <string>
+using namespace std;
 
 class Seat {
 private:
-    int row_number;
-    char seat_character;
+    int row;
+    char seat;
+    char status;
 public:
     // constructor
-    Seat(int row = -1, char seat = '\0') : row_number(row), seat_character(seat) {}
+    Seat(int r = -1, char s = '\0', char stat = ' ') 
+        : row(r), seat(s), status(stat) {}
 
     // getters
-    int get_row_num() const { return row_number; }
-    char get_seat_char() const { return seat_character; }
+    int get_row_num() const { return row; }
+    char get_seat_char() const { return seat; }
+    char get_status() const { return status; }
 
     // setters
-    void set_row_num(int row) { row_number = row; }
-    void set_seat_char(char seat) { seat_character = seat; }
+    void set_row_num(int r) { row = r; }
+    void set_seat_char(char s) { seat = s; }
+    void set_status(char stat) { status = stat; }
 };
 
 // NOTE: Logic is not implemented to check whether the given phone number is valid/formatted properly.
 // Will need to implement this logic in the main program before calling constructor/setter.
 class Passenger {
 private:
+    int id;
     string first_name;
     string last_name;
     string phone_number;
+    Seat * seat;
 public:
     // constructor
-    Passenger(string first = "", string last = "", string phone = "")
-        : first_name(first), last_name(last), phone_number(phone) {}
+    Passenger(int id_num = 0, string first = "", string last = "", string phone = "", Seat * s = nullptr)
+        : id(id_num), first_name(first), last_name(last), phone_number(phone), seat(s) {}
 
     // getters
+    int get_id() const { return id; }
     string get_first_name() const { return first_name; }
     string get_last_name() const { return last_name; }
     string get_phone_number() const { return phone_number; }
+    const Seat * get_seat() const { return seat; }
 
     // setters
+    void set_id(int id_num) { id = id_num; }
     void set_first_name(string first) { first_name = first; }
     void set_last_name(string last) { last_name = last; }
     void set_phone_number(string phone) { phone_number = phone; }
+    void set_seat(Seat * s) { seat = s; }
 };
 
-#endif
+#endif /* flight_classes.hpp */
