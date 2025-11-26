@@ -15,6 +15,6 @@ class Route {
         string get_destination()const{return destination;}
         void set_source(string src){source = src;}
         void set_destination(string dest){destination = dest;}
-}
+};
 
 #endif
