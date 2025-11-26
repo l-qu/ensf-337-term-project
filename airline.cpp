@@ -32,6 +32,5 @@ Flight Airline::get_flight(string id)const{
             return flights.at(i);
         }
     }
-    Flight emptyFlight;
-    return emptyFlight;
+    return NULL;
 }
