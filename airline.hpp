@@ -17,7 +17,7 @@ class Airline {
         void add_flight(string id, int rows, int cols);
         void remove_flight(string id);
         string get_name()const{return name;}
-        Flight get_flight(string id)const;
+        Flight* get_flight(string id);
         vector<Flight>& get_flights(){return flights;}
 };
 
