@@ -72,4 +72,15 @@ class Airline {
         vector<Flight>& get_flights(){return flights;}
 };
 
+class Route {
+    private: 
+        string source;
+        string destination;
+    public: 
+        string get_source()const{return source;}
+        string get_destination()const{return destination;}
+        void set_source(string src){source = src;}
+        void set_destination(string dest){destination = dest;}
+}
+
 #endif /* flight_classes.hpp */
