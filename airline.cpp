@@ -18,9 +18,9 @@ void Airline::add_flight(string id, int rows, int cols) {
 
 void Airline::remove_flight(string id) {
     for(size_t i = 0; i < flights.size(); i++) {
-        if(flights.at(i).at(0) == id) {
-            flights.erase(i);
-            break
+        if(flights.at(i).get_id() == id) {
+            flights.erase(flights.begin() + i);
+            break;
         }
     }
     return;
@@ -28,7 +28,7 @@ void Airline::remove_flight(string id) {
 
 Flight Airline::get_flight(string id)const{
     for(size_t i = 0; i < flights.size(); i++) {
-        if(flights.at(i).at(0) == id) {
+        if(flights.at(i).get_id() == id) {
             return flights.at(i);
         }
     }
