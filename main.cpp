@@ -1,4 +1,11 @@
-#include "flight_classes.hpp"
+#include "airline.hpp"
+#include "airline.cpp"
+#include "flight.hpp"
+#include "flight.cpp"
+#include "passenger.hpp"
+#include "route.hpp"
+#include "seat.hpp"
+
 #include <iostream>
 #include <vector>
 #include <string>
