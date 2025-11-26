@@ -19,7 +19,7 @@ void pressEnter() {
 }
 
 void displayHeader() {
-    cout << "\nFlight Mangement Application - Fall 2025\n";
+    cout << "\nFlight Management Application - Fall 2025\n";
     cout << "\nVersion: 1.0 ";
     cout << "\nTerm Project";
     cout << "\nProduced by: Chloe Khoo, Gianna Kong, Lindsey Quong (Group 8)\n\n";
@@ -27,7 +27,6 @@ void displayHeader() {
 }
 
 int menu() {
-    int choice = -1;
     cout << "Please select one the following options:\n\n";
     cout << "1. Select a flight\n";
     cout << "2. Display Flight Seat Map.\n";
@@ -37,8 +36,17 @@ int menu() {
     cout << "6. Save data\n";
     cout << "7. Quit. \n";
     cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6, or 7) ";
-    cin >> choice;
-    cleanStandardInputStream();
+    int choice = -1;
+    while (1) {
+        cin >> choice;
+        cleanStandardInputStream();
+        if(!(choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)) {
+            cout << "Invalid selection. Please try again.";
+            cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6, or 7) ";
+        } else {
+            break;
+        }
+    }
     return choice;
 }
 
