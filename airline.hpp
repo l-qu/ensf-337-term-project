@@ -13,7 +13,7 @@ class Airline {
         vector<Flight> flights;
 
     public:
-        Airline(string name);
+        Airline(string newName);
         void add_flight(string id, int rows, int cols);
         void remove_flight(string id);
         string get_name()const{return name;}
