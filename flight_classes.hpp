@@ -58,4 +58,18 @@ public:
     void set_seat(Seat * s) { seat = s; }
 };
 
+class Airline {
+    private: 
+        string name;
+        vector<Flight> flights;
+
+    public:
+        Airline(string name);
+        void add_flight(string id, int rows, int cols);
+        void remove_flight(string id);
+        string get_name()const{return name;}
+        int get_flight(string id)const;
+        vector<Flight>& get_flights(){return flights;}
+};
+
 #endif /* flight_classes.hpp */
