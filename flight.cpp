@@ -21,7 +21,7 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
 }
 
 Passenger* Flight::get_passenger(int id) {
-    for (int i = 0; i < passengers.size(); i++) {
+    for (int i = 0; i < (int) passengers.size(); i++) {
         if (passengers.at(i).get_id() == id) {
             return &(passengers.at(i));
         }
@@ -37,8 +37,10 @@ void Flight::add_passenger(int id, string fname, string lname, string phone) {
 }
 
 void Flight::remove_passenger(int id) {
-    for (int i = 0; i < passengers.size(); i++) {
+    for (int i = 0; i < (int) passengers.size(); i++) {
         if (passengers.at(i).get_id() == id) {
+            set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char() - 'A', ' ');
+            
             passengers.erase(passengers.begin() + i);
             return;
         }
@@ -71,5 +73,35 @@ void Flight::assign_seat(int row, char col, int passenger_id) {
         return;
     }
 
+    set_seat_status(row, col, 'X');
     new_passenger->set_seat(&seat_map.at(row).at(col - 'A'));
+}
+
+void Flight::show_seat_map() const {
+    // print out headers for columns
+    cout << "\t  " << 'A';
+    for (int i = 1; i < num_cols; i++) {
+        cout << "   " << (char) ('A' + i);
+    }
+    cout << endl;
+
+    // print out rest of map
+    int row = 0;
+    for (int i = 0; i < 2 * num_rows + 1; i++) {
+        if (i % 2 == 0) {
+            // divider row
+            cout << "\t+";
+            for (int j = 0; j < num_cols; j++) {
+                cout << "---+";
+            }
+        } else {
+            // row containing actual seats
+            cout << row << "\t|";
+            for (int j = 0; j < num_cols; j++) {
+                cout << " " << seat_map.at(row).at(j).get_status() << " |";
+            }
+            row++;
+        }
+        cout << endl;
+    }
 }
