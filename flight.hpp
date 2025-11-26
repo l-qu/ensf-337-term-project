@@ -1,4 +1,4 @@
-#ifndef FLIGHT__HPP
+#ifndef FLIGHT_HPP
 #define FLIGHT_HPP
 
 #include "passenger.hpp"
