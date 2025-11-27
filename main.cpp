@@ -102,6 +102,28 @@ vector<vector<string>> read_file(string filepath, int row_size) {
    return file_contents;
 }
 
+void populate_flights(vector<Flight> & flights, vector<vector<string>> & passenger_list) {
+    // populate each flight with the correct passengers
+    for (int i = 0; i < (int) passenger_list.size(); i++) {
+        for (int j = 0; (int) flights.size(); j++) {
+            if (passenger_list.at(i).at(0) == flights.at(j).get_id()) {
+                vector<string> row = passenger_list.at(i);
+                flights.at(j).add_passenger(row.at(5), row.at(1), row.at(2), row.at(3));
+                
+                // split seat string into a row number and seat character
+                string seat_str = row.at(4);
+                char seat_char = seat_str.back();
+                seat_str.pop_back();
+                int seat_row = stoi(seat_str);
+
+                flights.at(j).assign_seat(seat_row, seat_char, row.at(5));
+
+                break;
+            }
+        }
+    }
+}
+
 // MAIN PROGRAM
 
 int main(void) {
@@ -112,6 +134,16 @@ int main(void) {
         cout << "File(s) empty or not read properly. Terminating program." << endl;
         return 1;
     }
+
+    vector<Flight> flights;
+
+    // create flight objects from info read in from file
+    for (int i = 0; i < (int) flight_list.size(); i++) {
+        Flight new_flight(flight_list.at(i).at(0), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
+        flights.push_back(new_flight);
+    }
+
+    populate_flights(flights, passenger_list);
 
     displayHeader();
 
