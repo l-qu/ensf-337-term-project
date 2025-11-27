@@ -18,20 +18,20 @@ void Airline::add_flight(string id, int rows, int cols) {
 
 void Airline::remove_flight(string id) {
     for(size_t i = 0; i < flights.size(); i++) {
-        if(flights.at(i).at(0) == id) {
-            flights.erase(i);
-            break
+        if(flights.at(i).get_id() == id) {
+            flights.erase(flights.begin() + i);
+            break;
         }
     }
     return;
 }
 
-Flight Airline::get_flight(string id)const{
+Flight* Airline::get_flight(string id){
     for(size_t i = 0; i < flights.size(); i++) {
-        if(flights.at(i).at(0) == id) {
-            return flights.at(i);
+        if(flights.at(i).get_id() == id) {
+            return &(flights.at(i));
         }
     }
-    Flight emptyFlight;
-    return emptyFlight;
+    cout << "Flight does not exist.\n";
+    return nullptr;
 }

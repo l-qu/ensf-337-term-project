@@ -138,7 +138,9 @@ int main(void) {
     displayHeader();
 
     int choice;
-    while((choice = menu())){
+    bool quit = false;
+    while(!quit){
+        choice = menu();
         switch(choice){
             case 1:
                 cout << "\nImplement Option 1 here\n";
@@ -159,7 +161,8 @@ int main(void) {
                 cout << "\nImplement Option 6 here\n";
                 break;
             case 7:
-                cout << "\nImplement Option 7 here\n";
+                cout << "\nProgram terminated.\n";
+                quit = true;
                 break;
         }
     }
