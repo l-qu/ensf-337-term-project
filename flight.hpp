@@ -20,14 +20,14 @@ public:
 
     Flight(string id_num = "", int r = 25, int c = 6);
 
-    void add_passenger(int id, string fname, string lname, string phone);
-    void remove_passenger(int id);
-    Passenger* get_passenger(int id);
+    void add_passenger(string id, string fname, string lname, string phone);
+    void remove_passenger(string id);
+    Passenger* get_passenger(string id);
     string get_id()const { return id; }
     void show_seat_map()const;
     void set_seat_status(int row, char col, char status);
     bool check_seat(int row, int col)const;
-    void assign_seat(int row, char col, int passenger_id);
+    void assign_seat(int row, char col, string passenger_id);
     vector<Passenger> get_passengers_list() const{return passengers;}
 };
 

@@ -20,7 +20,7 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
     }
 }
 
-Passenger* Flight::get_passenger(int id) {
+Passenger* Flight::get_passenger(string id) {
     for (int i = 0; i < (int) passengers.size(); i++) {
         if (passengers.at(i).get_id() == id) {
             return &(passengers.at(i));
@@ -31,12 +31,12 @@ Passenger* Flight::get_passenger(int id) {
     return nullptr;
 }
 
-void Flight::add_passenger(int id, string fname, string lname, string phone) {
+void Flight::add_passenger(string id, string fname, string lname, string phone) {
     Passenger new_passenger(id, fname, lname, phone);
     passengers.push_back(new_passenger);
 }
 
-void Flight::remove_passenger(int id) {
+void Flight::remove_passenger(string id) {
     for (int i = 0; i < (int) passengers.size(); i++) {
         if (passengers.at(i).get_id() == id) {
             set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char() - 'A', ' ');
@@ -65,7 +65,7 @@ bool Flight::check_seat(int row, int col) const {
     }
 }
 
-void Flight::assign_seat(int row, char col, int passenger_id) {
+void Flight::assign_seat(int row, char col, string passenger_id) {
     Passenger* new_passenger = get_passenger(passenger_id);
     // Might or might not need the following error handling depending on how we write the main program
     if (new_passenger == nullptr) {

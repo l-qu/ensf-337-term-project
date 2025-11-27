@@ -7,6 +7,7 @@
 #include "seat.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 using namespace std;
@@ -60,6 +61,79 @@ int menu() {
 // MAIN PROGRAM
 
 int main(void) {
+    ifstream passfile("passengers.txt");
+    ifstream flightfile("flights.txt");
+    
+    if(passfile.fail()){
+        cout << "Error opening passenger file" << endl;
+        return 1;
+    }
+    if(flightfile.fail()){
+        cout << "Error opening flights file" << endl;
+        return 1;
+    }
+
+   vector<vector<string>> passenger_list;
+   vector<vector<string>> flight_list;
+   string line;
+
+    // Filling out passenger list
+   while(getline(passfile, line)){
+        vector<string> row;
+        string current = "";
+
+        for(int i = 0; i < line.size(); i++){
+            // getting non-whitespace characters
+            if(line[i] != ' ' && line[i] != '\t'){
+                current += line[i];
+            } else{
+                // push the finished string into vector
+                if(current.size() > 0){
+                    row.push_back(current);
+                    current = "";
+                }
+            }
+        }
+        // last string push
+        if(current.size() > 0){
+            row.push_back(current);
+        }
+
+        // pushing into main vector
+        if(row.size() == 6){
+            passenger_list.push_back(row);
+        }
+   }
+
+   // Filling out flight list
+   while(getline(flightfile, line)){
+        vector<string> row;
+        string current = "";
+
+        for(int i = 0; i < line.size(); i++){
+            // getting non-whitespace characters
+            if(line[i] != ' ' && line[i] != '\t'){
+                current += line[i];
+            } else{
+                // push the finished string into vector
+                if(current.size() > 0){
+                    row.push_back(current);
+                    current = "";
+                }
+            }
+        }
+        // last string push
+        if(current.size() > 0){
+            row.push_back(current);
+        }
+
+        // pushing into main vector if at the end of row
+        if(row.size() == 5){
+            flight_list.push_back(row);
+        }
+   }
+    passfile.close();
+    flightfile.close();
 
     displayHeader();
 
