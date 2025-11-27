@@ -58,31 +58,23 @@ int menu() {
     return choice;
 }
 
-// MAIN PROGRAM
+vector<vector<string>> read_file(string filepath, int row_size) {
+    vector<vector<string>> file_contents;
+    string line;
 
-int main(void) {
-    ifstream passfile("passengers.txt");
-    ifstream flightfile("flights.txt");
+    ifstream newfile(filepath);
     
-    if(passfile.fail()){
-        cout << "Error opening passenger file" << endl;
-        return 1;
+    if(newfile.fail()){
+        cout << "Error opening file: " << filepath << endl;
+        return file_contents;
     }
-    if(flightfile.fail()){
-        cout << "Error opening flights file" << endl;
-        return 1;
-    }
-
-   vector<vector<string>> passenger_list;
-   vector<vector<string>> flight_list;
-   string line;
-
-    // Filling out passenger list
-   while(getline(passfile, line)){
+    
+    // Filling out list with file contents
+    while(getline(newfile, line)){
         vector<string> row;
         string current = "";
 
-        for(int i = 0; i < line.size(); i++){
+        for(int i = 0; i < (int) line.size(); i++){
             // getting non-whitespace characters
             if(line[i] != ' ' && line[i] != '\t'){
                 current += line[i];
@@ -100,40 +92,26 @@ int main(void) {
         }
 
         // pushing into main vector
-        if(row.size() == 6){
-            passenger_list.push_back(row);
+        if((int) row.size() == row_size){
+            file_contents.push_back(row);
         }
    }
 
-   // Filling out flight list
-   while(getline(flightfile, line)){
-        vector<string> row;
-        string current = "";
+   newfile.close();
 
-        for(int i = 0; i < line.size(); i++){
-            // getting non-whitespace characters
-            if(line[i] != ' ' && line[i] != '\t'){
-                current += line[i];
-            } else{
-                // push the finished string into vector
-                if(current.size() > 0){
-                    row.push_back(current);
-                    current = "";
-                }
-            }
-        }
-        // last string push
-        if(current.size() > 0){
-            row.push_back(current);
-        }
+   return file_contents;
+}
 
-        // pushing into main vector if at the end of row
-        if(row.size() == 5){
-            flight_list.push_back(row);
-        }
-   }
-    passfile.close();
-    flightfile.close();
+// MAIN PROGRAM
+
+int main(void) {
+    vector<vector<string>> passenger_list = read_file("flight_data/passengers.txt", 6);
+    vector<vector<string>> flight_list = read_file("flight_data/flights.txt", 5);
+
+    if (passenger_list.size() == 0 || flight_list.size() == 0) {
+        cout << "File(s) empty or not read properly. Terminating program." << endl;
+        return 1;
+    }
 
     displayHeader();
 
