@@ -18,7 +18,7 @@ private:
 
 public:
 
-    Flight(string id_num = "", int r = 25, int c = 6);
+    Flight(string id_num = "", int r = 0, int c = 0);
 
     void add_passenger(string id, string fname, string lname, string phone);
     void remove_passenger(string id);
