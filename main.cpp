@@ -27,10 +27,10 @@ void pressEnter() {
 }
 
 void displayHeader() {
-    cout << "\nFlight Management Application - Fall 2025\n";
-    cout << "\nVersion: 1.0 ";
-    cout << "\nTerm Project";
-    cout << "\nProduced by: Chloe Khoo, Gianna Kong, Lindsey Quong (Group 8)\n\n";
+    cout << "\nFMAS Version: 1.0";
+    cout << "\nTerm Project - Flight Management Application System";
+    cout << "\nProduced by Group #: 8";
+    cout << "\nNames: Chloe Khoo, Gianna Kong, Lindsey Quong\n";
     pressEnter();
 }
 
