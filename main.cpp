@@ -133,14 +133,17 @@ int main(void) {
         return 1;
     }
 
-    vector<Flight> flights;
+    Airline currentAirline("WestJet")
+    // vector<Flight> flights;
 
     // create flight objects from info read in from file
     for (int i = 0; i < (int) flight_list.size(); i++) {
         Flight new_flight(flight_list.at(i).at(0), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
-        flights.push_back(new_flight);
+        // flights.push_back(new_flight);
+        currentAirline.add_flight(new_flight.id, new_flight.num_rows, new_flight.num_cols)
     }
 
+    // flights does not exist anymore, must populate flights with currentAirline.flights
     populate_flights(flights, passenger_list);
 
     displayHeader();
