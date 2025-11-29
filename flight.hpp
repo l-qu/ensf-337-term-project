@@ -24,6 +24,8 @@ public:
     void remove_passenger(string id);
     Passenger* get_passenger(string id);
     string get_id()const { return id; }
+    int get_rows()const {return num_rows;}
+    int get_cols()const {return num_cols;}
     void show_seat_map()const;
     void set_seat_status(int row, char col, char status);
     bool check_seat(int row, int col)const;
