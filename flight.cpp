@@ -112,15 +112,15 @@ void Flight::show_seat_map() const {
 
 void Flight::show_passengers()const {
     cout << "Passenger List (Flight:" << id << " from " << flight_route.get_source() << " to " << flight_route.get_destination() << ")" << endl;
-    cout << "First Name\tLast Name\tPhone\tRow\tSeat\tID" << endl; 
-    cout << string(65, '-') << endl;
+    cout << "First Name\tLast Name\tPhone\t\tRow\tSeat\tID" << endl; 
+    cout << string(70, '-') << endl;
     for(size_t i = 0; i < passengers.size(); i++) {
-        cout << passengers.at(i).get_first_name();
-        cout << passengers.at(i).get_last_name();
-        cout << passengers.at(i).get_phone_number();
-        cout << passengers.at(i).get_seat()->get_row_num();
-        cout << passengers.at(i).get_seat()->get_seat_char();
-        cout << passengers.at(i).get_id();
-        cout << string(65, '-') << endl;
+        cout << passengers.at(i).get_first_name() << "\t\t";
+        cout << passengers.at(i).get_last_name() << "\t\t";
+        cout << passengers.at(i).get_phone_number() << "\t";
+        cout << passengers.at(i).get_seat()->get_row_num() << "\t";
+        cout << passengers.at(i).get_seat()->get_seat_char() << "\t";
+        cout << passengers.at(i).get_id() << endl;
+        cout << string(70, '-') << endl;
     }
 }
