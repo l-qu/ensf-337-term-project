@@ -20,9 +20,9 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
     }
 }
 
-Passenger* Flight::get_passenger(string id) {
+Passenger* Flight::get_passenger(string id_num) {
     for (int i = 0; i < (int) passengers.size(); i++) {
-        if (passengers.at(i).get_id() == id) {
+        if (passengers.at(i).get_id() == id_num) {
             return &(passengers.at(i));
         }
     }
@@ -31,19 +31,19 @@ Passenger* Flight::get_passenger(string id) {
     return nullptr;
 }
 
-void Flight::add_passenger(string id, string fname, string lname, string phone) {
-    Passenger new_passenger(id, fname, lname, phone);
+void Flight::add_passenger(string id_num, string fname, string lname, string phone) {
+    Passenger new_passenger(id_num, fname, lname, phone);
     passengers.push_back(new_passenger);
 }
 
-void Flight::remove_passenger(string id) {
+void Flight::remove_passenger(string id_num) {
     for (int i = 0; i < (int) passengers.size(); i++) {
-        if (passengers.at(i).get_id() == id) {
-            set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char() - 'A', ' ');
+        if (passengers.at(i).get_id() == id_num) {
+            set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char(), ' ');
             
-            passengers.erase(passengers.begin() + i);
             cout << "\nPassenger " << passengers.at(i).get_first_name() << " " << passengers.at(i).get_last_name()
                  << " was successfully removed from flight " << id << ".\n";
+            passengers.erase(passengers.begin() + i);
             return;
         }
     }

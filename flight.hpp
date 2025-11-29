@@ -20,9 +20,9 @@ public:
 
     Flight(string id_num = "", int r = 0, int c = 0);
 
-    void add_passenger(string id, string fname, string lname, string phone);
-    void remove_passenger(string id);
-    Passenger* get_passenger(string id);
+    void add_passenger(string id_num, string fname, string lname, string phone);
+    void remove_passenger(string id_num);
+    Passenger* get_passenger(string id_num);
     string get_id()const { return id; }
     int get_rows()const {return num_rows;}
     int get_cols()const {return num_cols;}
