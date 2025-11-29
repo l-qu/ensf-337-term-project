@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c) {
+Flight::Flight(string id_num, string src, string dest, int r, int c): id(id_num), num_rows(r), num_cols(c) {
     seat_map.resize(num_rows);
 
     for (int i = 0; i < num_rows; i++) {
@@ -18,6 +18,8 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
             seat_map.at(i).at(j).set_seat_char('A' + j);
         }
     }
+    flight_route.set_source(src);
+    flight_route.set_destination(dest);
 }
 
 Passenger* Flight::get_passenger(string id_num) {
