@@ -163,15 +163,15 @@ int main(void) {
     }
 
     Airline currentAirline("WestJet");
-    // vector<Flight> flights;
 
     // create flight objects from info read in from file
     for (int i = 0; i < (int) flight_list.size(); i++) {
-        Flight new_flight(flight_list.at(i).at(0), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
-        currentAirline.add_flight(new_flight.get_id(), new_flight.get_rows(), new_flight.get_cols());
+        Flight new_flight(flight_list.at(i).at(0), flight_list.at(i).at(1), flight_list.at(i).at(2), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
+        currentAirline.add_flight(new_flight.get_id(), new_flight.get_flight_src(), new_flight.get_flight_dest(), new_flight.get_rows(), new_flight.get_cols());
+        // this is a weird way to do this
+        // can probably just read directly into the add_flight function
     }
     
-    // must populate flights with currentAirline.flights
     populate_flights(currentAirline.get_flights(), passenger_list);
 
     vector<Flight>* flight_point = &currentAirline.get_flights();
@@ -204,7 +204,8 @@ int main(void) {
                 break;
             }
             case 3: {
-                cout << "\nImplement Option 3 here\n";
+                flight_choice.show_passengers();
+                pressEnter();
                 break;
             }
             case 4: {

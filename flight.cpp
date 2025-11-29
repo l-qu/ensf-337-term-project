@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c) {
+Flight::Flight(string id_num, string src, string dest, int r, int c): id(id_num), num_rows(r), num_cols(c) {
     seat_map.resize(num_rows);
 
     for (int i = 0; i < num_rows; i++) {
@@ -18,6 +18,8 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
             seat_map.at(i).at(j).set_seat_char('A' + j);
         }
     }
+    flight_route.set_source(src);
+    flight_route.set_destination(dest);
 }
 
 Passenger* Flight::get_passenger(string id_num) {
@@ -106,4 +108,24 @@ void Flight::show_seat_map() const {
         }
         cout << endl;
     }
+}
+
+void Flight::show_passengers()const {
+    if(passengers.empty()) {
+        cout << "\nThere are no passengers currently on this flight." << endl;
+    } else {
+        cout << "\nPassenger List (Flight:" << id << " from " << flight_route.get_source() << " to " << flight_route.get_destination() << ")" << endl;
+        cout << "First Name\tLast Name\tPhone\t\tRow\tSeat\tID" << endl; 
+        cout << string(70, '-') << endl;
+        for(size_t i = 0; i < passengers.size(); i++) {
+            cout << passengers.at(i).get_first_name() << "\t\t";
+            cout << passengers.at(i).get_last_name() << "\t\t";
+            cout << passengers.at(i).get_phone_number() << "\t";
+            cout << passengers.at(i).get_seat()->get_row_num() << "\t";
+            cout << passengers.at(i).get_seat()->get_seat_char() << "\t";
+            cout << passengers.at(i).get_id() << endl;
+            cout << string(70, '-') << endl;
+        }
+    }
+    
 }
