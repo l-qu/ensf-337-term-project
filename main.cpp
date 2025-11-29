@@ -180,12 +180,23 @@ int main(void) {
     bool quit = false;
     while(!quit){
         choice = menu();
+
+        if (choice != 1 && choice != 7 && flight_choice.get_id() == "") {
+            cout << "\nNo flight has been selected. Please choose a flight first.\n\n";
+            continue;
+        }
+
         switch(choice){
             case 1:
                 flight_choice = menu_1(flight_point, flight_list);
                 break;
             case 2:
-                cout << "\nImplement Option 2 here\n";
+                
+                cout << "\nAircraft Seat Map for Flight " << flight_choice.get_id() << endl;
+
+                flight_choice.show_seat_map();
+                pressEnter();
+
                 break;
             case 3:
                 cout << "\nImplement Option 3 here\n";
