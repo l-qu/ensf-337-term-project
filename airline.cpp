@@ -10,8 +10,8 @@ Airline::Airline(string newName):name(newName){
     flights = flightList;
 }
 
-void Airline::add_flight(string id, int rows, int cols) {
-    Flight newFlight(id, rows, cols);
+void Airline::add_flight(string id, string src, string dest, int rows, int cols) {
+    Flight newFlight(id, src, dest, rows, cols);
     flights.push_back(newFlight);
     return;
 }

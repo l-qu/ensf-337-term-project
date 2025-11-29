@@ -14,7 +14,7 @@ class Airline {
 
     public:
         Airline(string newName);
-        void add_flight(string id, int rows, int cols);
+        void add_flight(string id, string src, string dest, int rows, int cols);
         void remove_flight(string id);
         string get_name()const{return name;}
         Flight* get_flight(string id);
