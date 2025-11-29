@@ -192,31 +192,38 @@ int main(void) {
         }
 
         switch(choice){
-            case 1:
+            case 1: {
                 flight_choice = menu_1(flight_point, flight_list);
                 pressEnter();
                 break;
-            case 2:
+            }
+            case 2: {
                 cout << "\nAircraft Seat Map for Flight " << flight_choice.get_id() << "\n\n";
                 flight_choice.show_seat_map();
                 pressEnter();
                 break;
-            case 3:
+            }
+            case 3: {
                 cout << "\nImplement Option 3 here\n";
                 break;
-            case 4:
+            }
+            case 4: {
                 cout << "\nImplement Option 4 here\n";
                 break;
-            case 5:
+            }
+            case 5: {
                 cout << "\nImplement Option 5 here\n";
                 break;
-            case 6:
+            }
+            case 6: {
                 cout << "\nImplement Option 6 here\n";
                 break;
-            case 7:
+            }
+            case 7: {
                 cout << "\nProgram terminated.\n";
                 quit = true;
                 break;
+            }
         }
     }
 
