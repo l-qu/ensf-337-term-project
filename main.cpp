@@ -125,9 +125,9 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
 Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
     cout << "\nPlease select one of the following flights...\n";
     
-    for (int i = 0; i < flight_list.size(); i++){
-        cout << i + 1 << ". ";
-        for (int j = 0; j < flight_list[i].size(); j++){
+    for (int i = 0; i < (int) flight_list.size(); i++){
+        cout << "\t" << i + 1 << ". ";
+        for (int j = 0; j < (int) flight_list[i].size(); j++){
             cout << flight_list[i][j] << " ";
         }
         cout << endl;
@@ -138,7 +138,7 @@ Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
         cout << "\nEnter your choice: ";
         cin >> selection;
         cleanStandardInputStream();
-        if(selection > flight_list.size() || selection == 0){
+        if(selection > (int) flight_list.size() || selection == 0){
             cout << "Invalid selection. Please try again.\n";
             continue;
         }
