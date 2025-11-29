@@ -171,8 +171,8 @@ int main(void) {
         currentAirline.add_flight(new_flight.id, new_flight.num_rows, new_flight.num_cols)
     }
 
-    // flights does not exist anymore, must populate flights with currentAirline.flights
-    populate_flights(flights, passenger_list);
+    // must populate flights with currentAirline.flights
+    populate_flights(currentAirline.flights, passenger_list);
 
     vector<Flight>* flight_point = &flights;
     Flight flight_choice;
