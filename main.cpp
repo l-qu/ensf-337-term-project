@@ -122,6 +122,34 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
     }
 }
 
+Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
+    cout << "\nPlease select one of the following flights...\n";
+    
+    for (int i = 0; i < flight_list.size(); i++){
+        cout << i + 1 << ". ";
+        for (int j = 0; j < flight_list[i].size(); j++){
+            cout << flight_list[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    int selection = -1;
+    while(1){
+        cout << "\nEnter your choice: ";
+        cin >> selection;
+        cleanStandardInputStream();
+        if(selection > flight_list.size() || selection == 0){
+            cout << "Invalid selection. Please try again.\n";
+            continue;
+        }
+
+        Flight f = (*ptr)[selection - 1];
+
+        cout << "You have chosen flight number: " << f.get_id() << "\n" << endl;
+        return f;
+    }
+}
+
 // MAIN PROGRAM
 
 int main(void) {
@@ -146,6 +174,9 @@ int main(void) {
     // flights does not exist anymore, must populate flights with currentAirline.flights
     populate_flights(flights, passenger_list);
 
+    vector<Flight>* flight_point = &flights;
+    Flight flight_choice;
+
     displayHeader();
 
     int choice;
@@ -154,7 +185,7 @@ int main(void) {
         choice = menu();
         switch(choice){
             case 1:
-                cout << "\nImplement Option 1 here\n";
+                flight_choice = menu_1(flight_point, flight_list);
                 break;
             case 2:
                 cout << "\nImplement Option 2 here\n";
