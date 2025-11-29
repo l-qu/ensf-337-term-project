@@ -22,7 +22,7 @@ Flight::Flight(string id_num, int r, int c): id(id_num), num_rows(r), num_cols(c
 
 Passenger* Flight::get_passenger(string id_num) {
     for (int i = 0; i < (int) passengers.size(); i++) {
-        if (passengers.at(i).get_id() == id_num) {
+        if (stoi(passengers.at(i).get_id()) == stoi(id_num)) {
             return &(passengers.at(i));
         }
     }
@@ -38,14 +38,14 @@ void Flight::add_passenger(string id_num, string fname, string lname, string pho
 
 void Flight::remove_passenger(string id_num) {
     for (int i = 0; i < (int) passengers.size(); i++) {
-        if (passengers.at(i).get_id() == id_num) {
+        if (stoi(passengers.at(i).get_id()) == stoi(id_num)) {            
             set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char(), ' ');
             
             cout << "\nPassenger " << passengers.at(i).get_first_name() << " " << passengers.at(i).get_last_name()
                  << " was successfully removed from flight " << id << ".\n";
             passengers.erase(passengers.begin() + i);
             return;
-        }
+        } 
     }
 
     cout << "\nPassenger was not found in the list.\n";

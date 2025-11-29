@@ -212,7 +212,13 @@ int main(void) {
                 break;
             }
             case 5: {
-                cout << "\nImplement Option 5 here\n";
+                string id;
+                cout << "\nPlease enter the ID of the passenger that needs to be removed: ";
+                cin >> id;
+                cleanStandardInputStream();
+
+                flight_choice.remove_passenger(id);
+                pressEnter();
                 break;
             }
             case 6: {
