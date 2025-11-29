@@ -103,7 +103,7 @@ vector<vector<string>> read_file(string filepath, int row_size) {
 void populate_flights(vector<Flight> & flights, vector<vector<string>> & passenger_list) {
     // populate each flight with the correct passengers
     for (int i = 0; i < (int) passenger_list.size(); i++) {
-        for (int j = 0; (int) flights.size(); j++) {
+        for (int j = 0; j < (int) flights.size(); j++) {
             if (passenger_list.at(i).at(0) == flights.at(j).get_id()) {
                 vector<string> row = passenger_list.at(i);
                 flights.at(j).add_passenger(row.at(5), row.at(1), row.at(2), row.at(3));
