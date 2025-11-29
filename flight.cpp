@@ -42,11 +42,13 @@ void Flight::remove_passenger(string id) {
             set_seat_status(passengers.at(i).get_seat()->get_row_num(), passengers.at(i).get_seat()->get_seat_char() - 'A', ' ');
             
             passengers.erase(passengers.begin() + i);
+            cout << "\nPassenger " << passengers.at(i).get_first_name() << " " << passengers.at(i).get_last_name()
+                 << " was successfully removed from flight " << id << ".\n";
             return;
         }
     }
 
-    cout << "Passenger not in the list.\n";
+    cout << "\nPassenger was not found in the list.\n";
 }
 
 void Flight::set_seat_status(int row, char col, char status) {
