@@ -162,17 +162,19 @@ int main(void) {
         return 1;
     }
 
-    vector<Flight> flights;
+    Airline currentAirline("WestJet");
+    // vector<Flight> flights;
 
     // create flight objects from info read in from file
     for (int i = 0; i < (int) flight_list.size(); i++) {
         Flight new_flight(flight_list.at(i).at(0), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
-        flights.push_back(new_flight);
+        currentAirline.add_flight(new_flight.get_id(), new_flight.get_rows(), new_flight.get_cols());
     }
+    
+    // must populate flights with currentAirline.flights
+    populate_flights(currentAirline.get_flights(), passenger_list);
 
-    populate_flights(flights, passenger_list);
-
-    vector<Flight>* flight_point = &flights;
+    vector<Flight>* flight_point = &currentAirline.get_flights();
     Flight flight_choice;
 
     displayHeader();
