@@ -103,7 +103,7 @@ vector<vector<string>> read_file(string filepath, int row_size) {
 void populate_flights(vector<Flight> & flights, vector<vector<string>> & passenger_list) {
     // populate each flight with the correct passengers
     for (int i = 0; i < (int) passenger_list.size(); i++) {
-        for (int j = 0; (int) flights.size(); j++) {
+        for (int j = 0; j < (int) flights.size(); j++) {
             if (passenger_list.at(i).at(0) == flights.at(j).get_id()) {
                 vector<string> row = passenger_list.at(i);
                 flights.at(j).add_passenger(row.at(5), row.at(1), row.at(2), row.at(3));
@@ -125,9 +125,9 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
 Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
     cout << "\nPlease select one of the following flights...\n";
     
-    for (int i = 0; i < flight_list.size(); i++){
-        cout << i + 1 << ". ";
-        for (int j = 0; j < flight_list[i].size(); j++){
+    for (int i = 0; i < (int) flight_list.size(); i++){
+        cout << "\t" << i + 1 << ". ";
+        for (int j = 0; j < (int) flight_list[i].size(); j++){
             cout << flight_list[i][j] << " ";
         }
         cout << endl;
@@ -138,7 +138,7 @@ Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
         cout << "\nEnter your choice: ";
         cin >> selection;
         cleanStandardInputStream();
-        if(selection > flight_list.size() || selection == 0){
+        if(selection > (int) flight_list.size() || selection == 0){
             cout << "Invalid selection. Please try again.\n";
             continue;
         }
@@ -183,12 +183,23 @@ int main(void) {
     bool quit = false;
     while(!quit){
         choice = menu();
+
+        if (choice != 1 && choice != 7 && flight_choice.get_id() == "") {
+            cout << "\nNo flight has been selected. Please choose a flight first.\n\n";
+            continue;
+        }
+
         switch(choice){
             case 1:
                 flight_choice = menu_1(flight_point, flight_list);
                 break;
             case 2:
-                cout << "\nImplement Option 2 here\n";
+                
+                cout << "\nAircraft Seat Map for Flight " << flight_choice.get_id() << endl;
+
+                flight_choice.show_seat_map();
+                pressEnter();
+
                 break;
             case 3:
                 cout << "\nImplement Option 3 here\n";
