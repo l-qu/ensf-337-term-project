@@ -109,3 +109,8 @@ void Flight::show_seat_map() const {
         cout << endl;
     }
 }
+
+void Flight::show_passengers()const {
+    cout << "Passenger List (Flight:" << id << " from " << flight_route.get_source() << " to " << flight_route.get_destination() << ")" << endl;
+    cout << "First Name\tLast Name\tPhone\tRow\tSeat\tID" << endl;
+}

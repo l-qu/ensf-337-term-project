@@ -33,6 +33,7 @@ public:
     bool check_seat(int row, int col)const;
     void assign_seat(int row, char col, string passenger_id);
     vector<Passenger> get_passengers_list() const{return passengers;}
+    void show_passengers()const;
 
     string get_flight_src()const {return flight_route.get_source();}
     string get_flight_dest()const {return flight_route.get_destination();}

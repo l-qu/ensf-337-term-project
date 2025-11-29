@@ -204,7 +204,8 @@ int main(void) {
                 break;
             }
             case 3: {
-                cout << "\nImplement Option 3 here\n";
+                flight_choice.show_passengers();
+                pressEnter();
                 break;
             }
             case 4: {
