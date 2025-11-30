@@ -240,7 +240,7 @@ int main(void) {
     populate_flights(currentAirline.get_flights(), passenger_list);
 
     vector<Flight>* flight_point = &currentAirline.get_flights();
-    Flight * flight_choice;
+    Flight * flight_choice = nullptr;
 
     displayHeader();
 
@@ -250,7 +250,7 @@ int main(void) {
         choice = menu();
 
         // check that the user has chosen a flight
-        if (choice != 1 && choice != 7 && (*flight_choice).get_id() == "") {
+        if (choice != 1 && choice != 7 && flight_choice == nullptr) {
             cout << "\nNo flight has been selected. Please choose a flight first.\n";
             pressEnter();
             continue;
