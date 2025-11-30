@@ -302,9 +302,31 @@ int main(void) {
                 cout << "\nEnter the passenger's desired row: ";
                 cin >> row;
                 cleanStandardInputStream();
+                while(1) {
+                    if(row < 0 || row > (*flight_choice).get_rows()) {
+                        cout << "That row does not exist. Please select another row." << endl;
+                        cout << "\nEnter the passenger's desired row: ";
+                        cin >> row;
+                        cleanStandardInputStream();
+                    } else {
+                        break;
+                    }
+                }
                 cout << "Enter the passenger's desired seat: ";
                 cin >> seat;
                 cleanStandardInputStream();
+                seat = toupper(seat);
+                while(1) {
+                    if(seat < 'A' || seat >= 'A' + (*flight_choice).get_cols()) {
+                        cout << "That seat does not exist. Please select another seat." << endl;
+                        cout << "Enter the passenger's desired seat: ";
+                        cin >> seat;
+                        cleanStandardInputStream();
+                        seat = toupper(seat);
+                    } else {
+                        break;
+                    }
+                }
                 while(1) {
                     if((*flight_choice).check_seat(row, seat)) {
                         break;
