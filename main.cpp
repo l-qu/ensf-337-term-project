@@ -222,7 +222,7 @@ int main(void) {
                 cout << "Please enter the passenger phone number: ";
                 cin >> phone;
                 cleanStandardInputStream();
-                cout << "Enter the passenger's desired row: ";
+                cout << "\nEnter the passenger's desired row: ";
                 cin >> row;
                 cleanStandardInputStream();
                 cout << "Enter the passenger's desired seat: ";
@@ -232,8 +232,8 @@ int main(void) {
                     if((*flight_choice).check_seat(row, seat)) {
                         break;
                     } else {
-                        cout << "That seat is occupied. Please select another.";
-                        cout << "Enter the passenger's desired row: ";
+                        cout << "\nThat seat is occupied. Please select another.";
+                        cout << "\n\nEnter the passenger's desired row: ";
                         cin >> row;
                         cleanStandardInputStream();
                         cout << "Enter the passenger's desired seat: ";
