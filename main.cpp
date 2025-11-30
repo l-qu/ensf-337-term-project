@@ -133,14 +133,14 @@ void save_data(string filepath, int row_size, vector<vector<string>> to_save){
                 holder = "";
             }
             overwrite.close();  
-            cout << "All data in the passenger list were saved.\n" << endl;
+            cout << "\nAll data in the passenger list were saved." << endl;
             return;
 
         }else if (yes_no == "N" || yes_no == "n"){
-            cout<< "\n All data in passenger list were not saved."<< endl;
+            cout<< "\nAll data in passenger list were not saved."<< endl;
             return;
         }else{
-            cout<< "\n Invalid input, please try again." << endl;
+            cout<< "\nInvalid input, please try again." << endl;
             continue;
         }
     }  
@@ -316,9 +316,9 @@ int main(void) {
                     cin >> id;
                     cleanStandardInputStream();
                     if(!isNumeric(id)) {
-                        cout << "Invalid input. ID numbers must be numeric." << endl;
+                        cout << "\nInvalid input. ID numbers must be numeric.\n" << endl;
                     } else if(count(id_list.begin(), id_list.end(), id) == 1) {
-                        cout << "A passenger with that ID is already on this flight. Please enter another." << endl;
+                        cout << "\nA passenger with that ID is already on this flight. Please enter another.\n" << endl;
                     } else {
                         break;
                     }
@@ -334,7 +334,7 @@ int main(void) {
                     cin >> phone;
                     cleanStandardInputStream();
                     if(!isValidPhone(phone)) {
-                        cout << "Invalid phone number. Use the format 000-000-0000." << endl;
+                        cout << "\nInvalid phone number. Use the format 000-000-0000.\n" << endl;
                     } else {
                         break;
                     }
@@ -346,10 +346,10 @@ int main(void) {
                     if(cin.fail()) {
                         cin.clear();
                         cleanStandardInputStream();
-                        cout << "Invalid input. Please enter an integer." << endl;
+                        cout << "\nInvalid input. Please enter an integer." << endl;
                         continue;
-                    } if(row < 0 || row > (*flight_choice).get_rows()) {
-                        cout << "That row does not exist. Please select another row." << endl;
+                    } if(row < 0 || row > (*flight_choice).get_rows() - 1) {
+                        cout << "\nThat row does not exist. Please select another row." << endl;
                     } else {
                         break;
                     }
@@ -360,10 +360,10 @@ int main(void) {
                     cleanStandardInputStream();
                     seat = toupper(seat);
                     if(seat < 'A' || seat >= 'A' + (*flight_choice).get_cols()) {
-                        cout << "That seat does not exist. Please select another seat." << endl;
+                        cout << "\nThat seat does not exist. Please select another seat.\n" << endl;
                         continue;
                     } if(!(*flight_choice).check_seat(row, seat)) {
-                        cout << "\nThat seat is occupied. Please select another." << endl;
+                        cout << "\nThat seat is occupied. Please select another.\n" << endl;
                         continue;
                     }
                     break;
