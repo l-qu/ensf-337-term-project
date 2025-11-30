@@ -107,6 +107,7 @@ void save_data(string filepath, int row_size, vector<vector<string>> to_save){
         cout << "\nDo you want to save the data into 'passengers.txt'? "
             << "(Please answer <Y or N>) ";
         cin >> yes_no;
+        cleanStandardInputStream();
 
         if(yes_no == "Y" || yes_no == "y"){
             ofstream overwrite(filepath);
@@ -120,7 +121,7 @@ void save_data(string filepath, int row_size, vector<vector<string>> to_save){
                 for (int j = 0; j < (int) to_save[i].size(); j++){
                     overwrite << to_save[i][j] << "\t";
                 }
-                overwrite << "\n";
+                overwrite << endl;
             }
             overwrite.close();  
             cout << "All data in the passenger list were saved.\n" << endl;
@@ -145,14 +146,17 @@ void remove_from_list(vector<vector<string>> & passengers, string ID){
     }
 }
 
-void add_to_list(Flight * flight, vector<vector<string>> passengers, string id_num, string fname, string lname, string phone, string seat){
+void add_to_list(Flight * flight, vector<vector<string>> & passengers, string id_num, string fname, string lname, string phone, int row, char seat){
     vector<string> newPassenger; 
     newPassenger.push_back((*flight).get_id());
     newPassenger.push_back(fname);
     newPassenger.push_back(lname);
     newPassenger.push_back(phone);
-    newPassenger.push_back(seat);
+    newPassenger.push_back(to_string(row) + seat);
     newPassenger.push_back(id_num);
+
+    passengers.push_back(newPassenger);
+    
     return;
 }
 
@@ -299,6 +303,7 @@ int main(void) {
                 }
                 (*flight_choice).add_passenger(id, fname, lname, phone);
                 (*flight_choice).assign_seat(row, seat, id);
+                add_to_list(flight_choice, passenger_list, id, fname, lname, phone, row, seat);
                 pressEnter();
                 break;
             }
