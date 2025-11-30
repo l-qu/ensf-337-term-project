@@ -42,14 +42,19 @@ int menu() {
     cout << "5. Remove an Existing Passenger\n";
     cout << "6. Save data\n";
     cout << "7. Quit. \n";
-    cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6, or 7) ";
     int choice = -1;
     while (1) {
+        cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6, or 7) ";
         cin >> choice;
         cleanStandardInputStream();
+        if(cin.fail()) {
+            cin.clear();
+            cleanStandardInputStream();
+            cout << "\nInvalid input. Please enter an integer." << endl;
+            continue;
+        }
         if(!(choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)) {
             cout << "\nInvalid selection. Please try again.\n";
-            cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6, or 7) ";
         } else {
             break;
         }
@@ -207,6 +212,12 @@ Flight* flight_selection(vector<Flight> * ptr, vector<vector<string>> flight_lis
         cout << "\nEnter your choice: ";
         cin >> selection;
         cleanStandardInputStream();
+        if(cin.fail()) {
+            cin.clear();
+            cleanStandardInputStream();
+            cout << "\nInvalid input. Please enter an integer." << endl;
+            continue;
+        }
         if(selection > (int) flight_list.size() || selection == 0){
             cout << "\nInvalid selection. Please try again.\n";
             continue;
