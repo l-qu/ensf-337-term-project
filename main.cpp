@@ -307,6 +307,14 @@ int main(void) {
                 cin >> row;
                 cleanStandardInputStream();
                 while(1) {
+                    if(cin.fail()) {
+                        cin.clear();
+                        cout << "Invalid input. Please enter an integer." << endl;
+                        cleanStandardInputStream();
+                        cout << "\nEnter the passenger's desired row: ";
+                        cin >> row;
+                        continue;
+                    }
                     if(row < 0 || row > (*flight_choice).get_rows()) {
                         cout << "That row does not exist. Please select another row." << endl;
                         cout << "\nEnter the passenger's desired row: ";
