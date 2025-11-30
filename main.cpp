@@ -220,6 +220,36 @@ Flight* flight_selection(vector<Flight> * ptr, vector<vector<string>> flight_lis
 
 // MAIN PROGRAM
 
+bool isNumeric(const string& id) {
+    if(id.empty()) {
+        return false;
+    }
+    const char* p = id.c_str();
+    while(*p != '\0') {
+        if(!isdigit(*p)) {
+            return false;
+        }
+        p++;
+    }
+    return true;
+}
+
+bool isValidPhone(const string& phone) {
+    if(phone.length() != 12) {
+        return false;
+    } if(phone[3] != '-' || phone[7] != '-') {
+        return false;
+    }
+    for(int i = 0; i < 12; i++) {
+        if(i == 3 || i == 7) {
+            continue;
+        } if(!isdigit(phone[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main(void) {
     vector<vector<string>> passenger_list = read_file("flight_data/passengers.txt", 6);
     vector<vector<string>> flight_list = read_file("flight_data/flights.txt", 5);
@@ -277,19 +307,18 @@ int main(void) {
                 string id, fname, lname, phone;
                 int row;
                 char seat;
-                cout << "Please enter the passenger id: ";
-                cin >> id;
-                cleanStandardInputStream();
                 vector<string> id_list;
                 for(size_t i = 0; i < (*flight_choice).get_passengers_list().size(); i++) {
                     id_list.push_back((*flight_choice).get_passengers_list().at(i).get_id());
                 }
                 while(1) {
-                    if(count(id_list.begin(), id_list.end(), id) == 1) {
+                    cout << "Please enter the passenger id: ";
+                    cin >> id;
+                    cleanStandardInputStream();
+                    if(!isNumeric(id)) {
+                        cout << "Invalid input. ID numbers must be numeric." << endl;
+                    } else if(count(id_list.begin(), id_list.end(), id) == 1) {
                         cout << "A passenger with that ID is already on this flight. Please enter another." << endl;
-                        cout << "Please enter the passenger id: ";
-                        cin >> id;
-                        cleanStandardInputStream();
                     } else {
                         break;
                     }
@@ -300,57 +329,44 @@ int main(void) {
                 cout << "Please enter the passenger last name: ";
                 cin >> lname;
                 cleanStandardInputStream();
-                cout << "Please enter the passenger phone number: ";
-                cin >> phone;
-                cleanStandardInputStream();
-                cout << "\nEnter the passenger's desired row: ";
-                cin >> row;
-                cleanStandardInputStream();
                 while(1) {
+                    cout << "Please enter the passenger phone number: ";
+                    cin >> phone;
+                    cleanStandardInputStream();
+                    if(!isValidPhone(phone)) {
+                        cout << "Invalid phone number. Use the format 000-000-0000." << endl;
+                    } else {
+                        break;
+                    }
+                }
+                while(1) {
+                    cout << "\nEnter the passenger's desired row: ";
+                    cin >> row;
+                    cleanStandardInputStream();
                     if(cin.fail()) {
                         cin.clear();
+                        cleanStandardInputStream();
                         cout << "Invalid input. Please enter an integer." << endl;
-                        cleanStandardInputStream();
-                        cout << "\nEnter the passenger's desired row: ";
-                        cin >> row;
                         continue;
-                    }
-                    if(row < 0 || row > (*flight_choice).get_rows()) {
+                    } if(row < 0 || row > (*flight_choice).get_rows()) {
                         cout << "That row does not exist. Please select another row." << endl;
-                        cout << "\nEnter the passenger's desired row: ";
-                        cin >> row;
-                        cleanStandardInputStream();
                     } else {
                         break;
                     }
                 }
-                cout << "Enter the passenger's desired seat: ";
-                cin >> seat;
-                cleanStandardInputStream();
-                seat = toupper(seat);
                 while(1) {
+                    cout << "Enter the passenger's desired seat: ";
+                    cin >> seat;
+                    cleanStandardInputStream();
+                    seat = toupper(seat);
                     if(seat < 'A' || seat >= 'A' + (*flight_choice).get_cols()) {
                         cout << "That seat does not exist. Please select another seat." << endl;
-                        cout << "Enter the passenger's desired seat: ";
-                        cin >> seat;
-                        cleanStandardInputStream();
-                        seat = toupper(seat);
-                    } else {
-                        break;
+                        continue;
+                    } if(!(*flight_choice).check_seat(row, seat)) {
+                        cout << "\nThat seat is occupied. Please select another." << endl;
+                        continue;
                     }
-                }
-                while(1) {
-                    if((*flight_choice).check_seat(row, seat)) {
-                        break;
-                    } else {
-                        cout << "\nThat seat is occupied. Please select another.";
-                        cout << "\n\nEnter the passenger's desired row: ";
-                        cin >> row;
-                        cleanStandardInputStream();
-                        cout << "Enter the passenger's desired seat: ";
-                        cin >> seat;
-                        cleanStandardInputStream();
-                    }
+                    break;
                 }
                 (*flight_choice).add_passenger(id, fname, lname, phone);
                 (*flight_choice).assign_seat(row, seat, id);
