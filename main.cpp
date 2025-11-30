@@ -100,6 +100,62 @@ vector<vector<string>> read_file(string filepath, int row_size) {
    return file_contents;
 }
 
+void save_data(string filepath, int row_size, vector<vector<string>> to_save){
+    string yes_no; 
+    bool selection = true;
+    while(selection){
+        cout << "\nDo you want to save the data into 'passengers.txt'? "
+            << "(Please answer <Y or N>) ";
+        cin >> yes_no;
+
+        if(yes_no == "Y" || yes_no == "y"){
+            ofstream overwrite(filepath);
+            
+            if(overwrite.fail()){
+                cout << "Error opening file: " << filepath << endl;
+                return;
+            }
+            
+            for (int i = 0; i < (int) to_save.size(); i++){
+                for (int j = 0; j < (int) to_save[i].size(); j++){
+                    overwrite << to_save[i][j] << "\t";
+                }
+                overwrite << "\n";
+            }
+            overwrite.close();  
+            cout << "All data in the passenger list were saved.\n" << endl;
+            return;
+
+        }else if (yes_no == "N" || yes_no == "n"){
+            cout<< "\n All data in passenger list were not saved."<< endl;
+            return;
+        }else{
+            cout<< "\n Invalid input, please try again." << endl;
+            continue;
+        }
+    }  
+}
+
+void remove_from_list(vector<vector<string>> & passengers, string ID){
+    for (int i = 0; i < (int)passengers.size(); i++){
+        if (stoi(passengers.at(i).back()) == stoi(ID)){
+            passengers.erase(passengers.begin() + i);
+            return;
+        }
+    }
+}
+
+void add_to_list(Flight * flight, vector<vector<string>> passengers, string id_num, string fname, string lname, string phone, string seat){
+    vector<string> newPassenger; 
+    newPassenger.push_back((*flight).get_id());
+    newPassenger.push_back(fname);
+    newPassenger.push_back(lname);
+    newPassenger.push_back(phone);
+    newPassenger.push_back(seat);
+    newPassenger.push_back(id_num);
+    return;
+}
+
 void populate_flights(vector<Flight> & flights, vector<vector<string>> & passenger_list) {
     // populate each flight with the correct passengers
     for (int i = 0; i < (int) passenger_list.size(); i++) {
@@ -122,7 +178,7 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
     }
 }
 
-Flight* menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
+Flight* flight_selction(vector<Flight> * ptr, vector<vector<string>> flight_list){
     cout << "\nPlease select one of the following flights...\n";
     
     for (int i = 0; i < (int) flight_list.size(); i++){
@@ -191,7 +247,7 @@ int main(void) {
 
         switch(choice){
             case 1: {
-                flight_choice = menu_1(flight_point, flight_list);
+                flight_choice = flight_selction(flight_point, flight_list);
                 pressEnter();
                 break;
             }
@@ -217,11 +273,13 @@ int main(void) {
                 cleanStandardInputStream();
 
                 (*flight_choice).remove_passenger(id);
+                remove_from_list(passenger_list, id);
                 pressEnter();
                 break;
             }
             case 6: {
-                cout << "\nImplement Option 6 here\n";
+                save_data("flight_data/passengers.txt", 6, passenger_list);
+                pressEnter();
                 break;
             }
             case 7: {
