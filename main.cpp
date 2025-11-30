@@ -207,7 +207,43 @@ int main(void) {
                 break;
             }
             case 4: {
-                cout << "\nImplement Option 4 here\n";
+                string id, fname, lname, phone;
+                int row;
+                char seat;
+                cout << "Please enter the passenger id: ";
+                cin >> id;
+                cleanStandardInputStream();
+                cout << "Please enter the passenger first name: ";
+                cin >> fname;
+                cleanStandardInputStream();
+                cout << "Please enter the passenger last name: ";
+                cin >> lname;
+                cleanStandardInputStream();
+                cout << "Please enter the passenger phone number: ";
+                cin >> phone;
+                cleanStandardInputStream();
+                cout << "Enter the passenger's desired row: ";
+                cin >> row;
+                cleanStandardInputStream();
+                cout << "Enter the passenger's desired seat: ";
+                cin >> seat;
+                cleanStandardInputStream();
+                while(1) {
+                    if((*flight_choice).check_seat(row, seat)) {
+                        break;
+                    } else {
+                        cout << "That seat is occupied. Please select another.";
+                        cout << "Enter the passenger's desired row: ";
+                        cin >> row;
+                        cleanStandardInputStream();
+                        cout << "Enter the passenger's desired seat: ";
+                        cin >> seat;
+                        cleanStandardInputStream();
+                    }
+                }
+                (*flight_choice).add_passenger(id, fname, lname, phone);
+                (*flight_choice).assign_seat(row, seat, id);
+                pressEnter();
                 break;
             }
             case 5: {
