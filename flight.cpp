@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 Flight::Flight(string id_num, string src, string dest, int r, int c): id(id_num), num_rows(r), num_cols(c) {
@@ -115,16 +116,12 @@ void Flight::show_passengers()const {
         cout << "\nThere are no passengers currently on this flight." << endl;
     } else {
         cout << "\nPassenger List (Flight:" << id << " from " << flight_route.get_source() << " to " << flight_route.get_destination() << ")" << endl;
-        cout << "\nFirst Name\tLast Name\tPhone\t\tRow\tSeat\tID" << endl; 
-        cout << string(69, '-') << endl;
+        cout << left << setw(15) << "First Name" << setw(15) << "Last Name" << setw(15) << "Phone" << setw(8) << "Row" << setw(8) << "Seat" << setw(10) << "ID" << endl;
+        cout << string(66, '-') << endl;
         for(size_t i = 0; i < passengers.size(); i++) {
-            cout << passengers.at(i).get_first_name() << "\t\t";
-            cout << passengers.at(i).get_last_name() << "\t\t";
-            cout << passengers.at(i).get_phone_number() << "\t";
-            cout << passengers.at(i).get_seat()->get_row_num() << "\t";
-            cout << passengers.at(i).get_seat()->get_seat_char() << "\t";
-            cout << passengers.at(i).get_id() << endl;
-            cout << string(69, '-') << endl;
+            cout << left << setw(15) << passengers.at(i).get_first_name() << setw(15) << passengers.at(i).get_last_name() << setw(15) << passengers.at(i).get_phone_number() 
+            << setw(8) << passengers.at(i).get_seat()->get_row_num() << setw(8) << passengers.at(i).get_seat()->get_seat_char() << setw(10) << passengers.at(i).get_id() << endl;
+            cout << string(66, '-') << endl;
         }
     }
     
