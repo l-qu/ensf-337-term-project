@@ -122,7 +122,7 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
     }
 }
 
-Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
+Flight* menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
     cout << "\nPlease select one of the following flights...\n";
     
     for (int i = 0; i < (int) flight_list.size(); i++){
@@ -143,11 +143,9 @@ Flight menu_1(vector<Flight> * ptr, vector<vector<string>> flight_list){
             continue;
         }
 
-        Flight f = (*ptr)[selection - 1];
-
-        cout << "\nYou have chosen flight " << f.get_id() << " from " << flight_list.at(selection - 1).at(1) 
+        cout << "\nYou have chosen flight " << (*ptr)[selection - 1].get_id() << " from " << flight_list.at(selection - 1).at(1) 
              << " to " << flight_list.at(selection - 1).at(2) << ".\n";
-        return f;
+        return &(*ptr)[selection - 1];
     }
 }
 
@@ -175,7 +173,7 @@ int main(void) {
     populate_flights(currentAirline.get_flights(), passenger_list);
 
     vector<Flight>* flight_point = &currentAirline.get_flights();
-    Flight flight_choice;
+    Flight * flight_choice;
 
     displayHeader();
 
@@ -185,7 +183,7 @@ int main(void) {
         choice = menu();
 
         // check that the user has chosen a flight
-        if (choice != 1 && choice != 7 && flight_choice.get_id() == "") {
+        if (choice != 1 && choice != 7 && (*flight_choice).get_id() == "") {
             cout << "\nNo flight has been selected. Please choose a flight first.\n";
             pressEnter();
             continue;
@@ -198,13 +196,13 @@ int main(void) {
                 break;
             }
             case 2: {
-                cout << "\nAircraft Seat Map for Flight " << flight_choice.get_id() << "\n\n";
-                flight_choice.show_seat_map();
+                cout << "\nAircraft Seat Map for Flight " << (*flight_choice).get_id() << "\n\n";
+                (*flight_choice).show_seat_map();
                 pressEnter();
                 break;
             }
             case 3: {
-                flight_choice.show_passengers();
+                (*flight_choice).show_passengers();
                 pressEnter();
                 break;
             }
@@ -218,7 +216,7 @@ int main(void) {
                 cin >> id;
                 cleanStandardInputStream();
 
-                flight_choice.remove_passenger(id);
+                (*flight_choice).remove_passenger(id);
                 pressEnter();
                 break;
             }
