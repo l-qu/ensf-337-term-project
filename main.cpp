@@ -376,9 +376,16 @@ int main(void) {
             }
             case 5: {
                 string id;
-                cout << "\nPlease enter the ID of the passenger that needs to be removed: ";
-                cin >> id;
-                cleanStandardInputStream();
+                while (1) {
+                    cout << "\nPlease enter the ID of the passenger that needs to be removed: ";
+                    cin >> id;
+                    cleanStandardInputStream();
+                    if(!isNumeric(id)) {
+                        cout << "\nInvalid input. ID numbers must be numeric." << endl;
+                    } else {
+                        break;
+                    }
+                }
 
                 (*flight_choice).remove_passenger(id);
                 remove_from_list(passenger_list, id);
