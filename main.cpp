@@ -75,7 +75,7 @@ vector<vector<string>> read_file(string filepath, int row_size) {
 
         for(int i = 0; i < (int) line.size(); i++){
             // getting non-whitespace characters
-            if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n'){
+            if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n' && line[i] != '\r'){
                 current += line[i];
             } else{
                 // push the finished string into vector
@@ -191,7 +191,7 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
     }
 }
 
-Flight* flight_selction(vector<Flight> * ptr, vector<vector<string>> flight_list){
+Flight* flight_selection(vector<Flight> * ptr, vector<vector<string>> flight_list){
     cout << "\nPlease select one of the following flights...\n";
     
     for (int i = 0; i < (int) flight_list.size(); i++){
@@ -235,8 +235,6 @@ int main(void) {
     for (int i = 0; i < (int) flight_list.size(); i++) {
         Flight new_flight(flight_list.at(i).at(0), flight_list.at(i).at(1), flight_list.at(i).at(2), stoi(flight_list.at(i).at(3)), stoi(flight_list.at(i).at(4)));
         currentAirline.add_flight(new_flight.get_id(), new_flight.get_flight_src(), new_flight.get_flight_dest(), new_flight.get_rows(), new_flight.get_cols());
-        // this is a weird way to do this
-        // can probably just read directly into the add_flight function
     }
     
     populate_flights(currentAirline.get_flights(), passenger_list);
@@ -260,7 +258,7 @@ int main(void) {
 
         switch(choice){
             case 1: {
-                flight_choice = flight_selction(flight_point, flight_list);
+                flight_choice = flight_selection(flight_point, flight_list);
                 pressEnter();
                 break;
             }
@@ -286,13 +284,11 @@ int main(void) {
                 for(size_t i = 0; i < (*flight_choice).get_passengers_list().size(); i++) {
                     id_list.push_back((*flight_choice).get_passengers_list().at(i).get_id());
                 }
-                string id_r = id + "\r";
                 while(1) {
-                    if(count(id_list.begin(), id_list.end(), id_r) == 1) {
+                    if(count(id_list.begin(), id_list.end(), id) == 1) {
                         cout << "A passenger with that ID is already on this flight. Please enter another." << endl;
                         cout << "Please enter the passenger id: ";
                         cin >> id;
-                        id_r = id + "\r";
                         cleanStandardInputStream();
                     } else {
                         break;
