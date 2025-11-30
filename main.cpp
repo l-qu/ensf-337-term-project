@@ -75,7 +75,7 @@ vector<vector<string>> read_file(string filepath, int row_size) {
 
         for(int i = 0; i < (int) line.size(); i++){
             // getting non-whitespace characters
-            if(line[i] != ' ' && line[i] != '\t'){
+            if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n'){
                 current += line[i];
             } else{
                 // push the finished string into vector
@@ -112,6 +112,7 @@ void save_data(string filepath, int row_size, vector<vector<string>> to_save){
 
         if(yes_no == "Y" || yes_no == "y"){
             ofstream overwrite(filepath);
+            string holder;
             
             if(overwrite.fail()){
                 cout << "Error opening file: " << filepath << endl;
@@ -120,9 +121,16 @@ void save_data(string filepath, int row_size, vector<vector<string>> to_save){
             
             for (int i = 0; i < (int) to_save.size(); i++){
                 for (int j = 0; j < (int) to_save[i].size(); j++){
-                    overwrite << to_save[i][j] << "\t";
+                    if((j + 1) == (int) to_save[i].size()){
+                        holder += to_save[i][j];
+                        break;
+                    }
+                    holder += to_save[i][j];
+                    holder += "\t";
                 }
-                overwrite << endl;
+                holder += "\n";
+                overwrite << holder;
+                holder = "";
             }
             overwrite.close();  
             cout << "All data in the passenger list were saved.\n" << endl;
