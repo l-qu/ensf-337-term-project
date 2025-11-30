@@ -115,8 +115,8 @@ void Flight::show_passengers()const {
         cout << "\nThere are no passengers currently on this flight." << endl;
     } else {
         cout << "\nPassenger List (Flight:" << id << " from " << flight_route.get_source() << " to " << flight_route.get_destination() << ")" << endl;
-        cout << "First Name\tLast Name\tPhone\t\tRow\tSeat\tID" << endl; 
-        cout << string(70, '-') << endl;
+        cout << "\nFirst Name\tLast Name\tPhone\t\tRow\tSeat\tID" << endl; 
+        cout << string(69, '-') << endl;
         for(size_t i = 0; i < passengers.size(); i++) {
             cout << passengers.at(i).get_first_name() << "\t\t";
             cout << passengers.at(i).get_last_name() << "\t\t";
@@ -124,7 +124,7 @@ void Flight::show_passengers()const {
             cout << passengers.at(i).get_seat()->get_row_num() << "\t";
             cout << passengers.at(i).get_seat()->get_seat_char() << "\t";
             cout << passengers.at(i).get_id() << endl;
-            cout << string(70, '-') << endl;
+            cout << string(69, '-') << endl;
         }
     }
     
