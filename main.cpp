@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 // FUNCTION DEFINITIONS BELOW
@@ -273,6 +274,22 @@ int main(void) {
                 cout << "Please enter the passenger id: ";
                 cin >> id;
                 cleanStandardInputStream();
+                vector<string> id_list;
+                for(size_t i = 0; i < (*flight_choice).get_passengers_list().size(); i++) {
+                    id_list.push_back((*flight_choice).get_passengers_list().at(i).get_id());
+                }
+                string id_r = id + "\r";
+                while(1) {
+                    if(count(id_list.begin(), id_list.end(), id_r) == 1) {
+                        cout << "A passenger with that ID is already on this flight. Please enter another." << endl;
+                        cout << "Please enter the passenger id: ";
+                        cin >> id;
+                        id_r = id + "\r";
+                        cleanStandardInputStream();
+                    } else {
+                        break;
+                    }
+                }
                 cout << "Please enter the passenger first name: ";
                 cin >> fname;
                 cleanStandardInputStream();
