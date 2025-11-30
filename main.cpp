@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <iomanip>
 using namespace std;
 
 // FUNCTION DEFINITIONS BELOW
@@ -197,14 +198,15 @@ void populate_flights(vector<Flight> & flights, vector<vector<string>> & passeng
 }
 
 Flight* flight_selection(vector<Flight> * ptr, vector<vector<string>> flight_list){
-    cout << "\nPlease select one of the following flights...\n";
-    
+    cout << "\nPlease select one of the following flights...\n\n";
+    cout << "\t" << left << setw(15) << "Flight ID" << setw(15) << "Departing" << setw(15) << "Destination" << setw(15) << "# of Rows" << setw(14) << "Seats Across" << endl;
+    cout << string(80, '-') << endl;
     for (int i = 0; i < (int) flight_list.size(); i++){
-        cout << "\t" << i + 1 << ". ";
+        cout << i + 1 << ".\t";
         for (int j = 0; j < (int) flight_list[i].size(); j++){
-            cout << flight_list[i][j] << " ";
+            cout << left << setw(15) << flight_list[i][j] << " ";
         }
-        cout << endl;
+        cout << '\n' << string(80, '-') << endl;
     }
 
     int selection = -1;
