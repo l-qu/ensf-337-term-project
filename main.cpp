@@ -245,18 +245,28 @@ bool isNumeric(const string& id) {
     return true;
 }
 
-bool isValidPhone(const string& phone) {
+bool isValidPhone(string& phone) {
     if(phone.length() != 12) {
+        cout << "wrong length";
         return false;
-    } if(phone[3] != '-' || phone[7] != '-') {
+    } 
+    bool dashes = (phone[3] == '-' && phone[7] == '-');
+    bool spaces = (phone[3] == ' ' && phone[7] == ' ');
+    if(!dashes && !spaces) {
+        cout << "not dashes or spaces";
         return false;
     }
     for(int i = 0; i < 12; i++) {
         if(i == 3 || i == 7) {
             continue;
         } if(!isdigit(phone[i])) {
+            cout << "not all numbers";
             return false;
         }
+    }
+    if(spaces) {
+        phone[3] = '-';
+        phone[7] = '-';
     }
     return true;
 }
@@ -342,10 +352,9 @@ int main(void) {
                 cleanStandardInputStream();
                 while(1) {
                     cout << "Please enter the passenger phone number: ";
-                    cin >> phone;
-                    cleanStandardInputStream();
+                    getline(cin, phone);
                     if(!isValidPhone(phone)) {
-                        cout << "\nInvalid phone number. Use the format 000-000-0000.\n" << endl;
+                        cout << "\nInvalid phone number. Use either 000-000-0000 or 000 000 0000 formats.\n" << endl;
                     } else {
                         break;
                     }
