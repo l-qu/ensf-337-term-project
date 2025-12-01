@@ -4,8 +4,7 @@
 #include "seat.hpp"
 #include <vector>
 #include <string>
-// NOTE: Logic is not implemented to check whether the given phone number is valid/formatted properly.
-// Will need to implement this logic in the main program before calling constructor/setter.
+
 class Passenger {
 private:
     string id;
